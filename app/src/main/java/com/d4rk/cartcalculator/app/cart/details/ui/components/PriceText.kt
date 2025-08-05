@@ -10,7 +10,10 @@ import java.util.Locale
 
 @Composable
 fun PriceText(price : Float , currency : String , modifier : Modifier = Modifier) {
-    val formattedPrice : String = String.format(Locale.getDefault() , "%.1f" , price).removeSuffix(suffix = ".0") + " $currency"
+    val formattedPrice : String = String
+            .format(Locale.getDefault() , "%.2f" , price)
+            .trimEnd('0')
+            .trimEnd('.') + " $currency"
 
     Row(modifier = modifier) {
         formattedPrice.forEach { char : Char ->

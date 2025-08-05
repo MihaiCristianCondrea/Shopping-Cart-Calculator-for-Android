@@ -108,7 +108,12 @@ fun CartItem(viewModel : CartViewModel , cartItem : ShoppingCartItemsTable , onM
                     Column(modifier = Modifier.weight(weight = 1f)) {
                         Text(text = cartItem.name , style = MaterialTheme.typography.bodyLarge , modifier = Modifier.basicMarquee())
                         Row {
-                            Text(text = String.format(Locale.getDefault() , "%.1f" , cartItem.price.toFloat()).removeSuffix(suffix = ".0"))
+                            Text(
+                                text = String
+                                        .format(Locale.getDefault() , "%.2f" , cartItem.price.toFloat())
+                                        .trimEnd('0')
+                                        .trimEnd('.')
+                            )
                             ExtraSmallHorizontalSpacer()
                             uiState.data?.selectedCurrency?.let { Text(text = it , style = MaterialTheme.typography.bodyLarge) }
                         }
