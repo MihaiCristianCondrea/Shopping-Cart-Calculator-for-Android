@@ -40,8 +40,8 @@ import java.util.Locale
 fun CartItem(
     cart : ShoppingCartTable , onDelete : (ShoppingCartTable) -> Unit , onCardClick : () -> Unit , onRename : (ShoppingCartTable) -> Unit , onShare : (ShoppingCartTable) -> Unit , uiState : UiHomeData , modifier : Modifier
 ) {
-    val dateFormat = SimpleDateFormat("dd-MM-yyyy" , Locale.getDefault())
-    val dateString : String = dateFormat.format(cart.date)
+    val dateFormat = remember { SimpleDateFormat("dd-MM-yyyy" , Locale.getDefault()) }
+    val dateString : String = remember(cart.date) { dateFormat.format(cart.date) }
     val view : View = LocalView.current
     val dismissState : SwipeToDismissBoxState = rememberSwipeToDismissBoxState(confirmValueChange = {
         if (it == SwipeToDismissBoxValue.StartToEnd || it == SwipeToDismissBoxValue.EndToStart) {
